@@ -1,0 +1,33 @@
+server:
+  port: 0
+  error:
+    include-message: always
+spring:
+  application:
+    name: grades-ms
+  flyway:
+    enabled: true
+    baselineVersion: 1
+    locations:
+      classpath: db/migration
+    sqlMigrationSuffixes: .sql
+    baselineOnMigrate: true
+    sqlMigrationPrefix: V
+    schemas: public
+  datasource:
+    url: jdbc:postgresql://ep-small-math-a5euyyrd-pooler.us-east-2.aws.neon.tech:5432/ms-grades?socketTimeout=3
+    username: magbmail
+    password: Jozta1QBnj9I
+    driverClassName: org.postgresql.Driver
+
+#Conexion para registro de esta API en eureka
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+
+# Las siguientes 3 lineas opcional cuando se deba especificar la ruta de Eureka
+# En caso de que todos los microservicios corra en localhost no es necesario
+
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
